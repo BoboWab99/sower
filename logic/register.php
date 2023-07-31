@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $password2 = test_input($_POST['password2']);
 
    // save to database
-   $query = "INSERT INTO `user`(`username`, `first_name`, `last_name`, `email`, `password`)";
+   $query = "INSERT INTO `user` (`username`, `first_name`, `last_name`, `email`, `password`)";
    $query .= "VALUES ('{$username}', '{$firstName}', '{$lastName}', '{$email}', '{$password1}');";
 
    $conn = getConnection();

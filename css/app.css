@@ -1,4 +1,9 @@
 
+img {
+   display: block;
+   max-width: 100%;
+}
+
 .form-field {
    display: grid;
    gap: .25rem;
@@ -20,4 +25,17 @@
 :focus:valid {
    border-color: var(--bs-success);
    box-shadow: 0 0 0 .25rem rgba(60, 153, 110, .4);
+}
+
+.shadow--1 {
+   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.post-image {
+   width: 70px;
+   height: 70px;
+   flex-grow: 0;
+   flex-shrink: 0;
+   background-color: lightblue;
+   border-radius: .5rem;
 }
