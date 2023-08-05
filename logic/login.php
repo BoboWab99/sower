@@ -1,7 +1,10 @@
 <?php
 
-require_once "./db.php";
-require_once "./functions.php";
+// require_once "db.php";
+require_once "functions.php";
+require_once "user.class.php";
+
+session_start();
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -10,26 +13,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $email = test_input($_POST['email']);
    $password = test_input($_POST['password']);
 
-   // check data from db
-   $query = "SELECT `id` FROM `user`";
-   $query .= "WHERE `email` = '{$email}' AND `password` = '{$password}';";
+   // make new user
+   $user = User::create($email, $password);
 
-   $conn = getConnection();
-   if ($result = mysqli_query($conn, $query)) {
-      if (mysqli_num_rows($result) > 0) {
-         header('Location: ../pages/core/posts.php');
-         exit();
-      } else {
-         // send some messages back
-         header('Location: ../pages/core/login.php');
-         exit();
-      }
+   if ($user) {
+      $_SESSION['auth_user'] = $user;              // authorized user
+      $_SESSION['auth_user_id'] = $user->id;       // authorized user's id
+      header('Location: ../pages/core/posts.php');
    } else {
-      echo "Error: " . $query . "<br>" . mysqli_error($conn);
+      // send some messages back
+      header('Location: ../pages/core/login.php');
    }
-
-   // close connection,
-   mysqli_close($conn);
+   exit();
 }
 
 ?>

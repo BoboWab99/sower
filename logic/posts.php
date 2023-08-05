@@ -2,6 +2,19 @@
 
 require_once "db.php";
 require_once "functions.php";
+// require_once "user.class.php";
+
+session_start();
+
+// check if there's logged in user
+if (!isset($_SESSION['auth_user'])) {
+   header('Location: ../pages/core/login.php');
+   exit();
+}
+
+// user info
+$user = $_SESSION['auth_user'];
+
 
 // sql statements
 $query_tags = "SELECT * FROM `tag`";
@@ -9,8 +22,8 @@ $query_posts = "SELECT * FROM `post`";
 $query_categories = "SELECT * FROM `category`";
 
 $tags = [];          // to store tags
-$categories = [];    // to store categories
 $posts = [];         // to store posts
+$categories = [];    // to store categories
 
 // connection to db
 $conn = getConnection();
@@ -22,8 +35,6 @@ if ($result = mysqli_query($conn, $query_tags)) {
          $tags[] = $tag;
       }
    }
-} else {
-   echo "Error: " . $query . "<br>" . mysqli_error($conn);
 }
 
 // fetch categories
@@ -33,8 +44,6 @@ if ($result = mysqli_query($conn, $query_categories)) {
          $categories[] = $category;
       }
    }
-} else {
-   echo "Error: " . $query . "<br>" . mysqli_error($conn);
 }
 
 // fetch posts
@@ -44,8 +53,6 @@ if ($result = mysqli_query($conn, $query_posts)) {
          $posts[] = $post;
       }
    }
-} else {
-   echo "Error: " . $query . "<br>" . mysqli_error($conn);
 }
 
 // close connection,
@@ -67,8 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // go back to posts
       header('Location: ../pages/core/posts.php');
       exit();
-   } else {
-      echo "Error: " . $query . "<br>" . mysqli_error($conn);
    }
 
    // close connection,
