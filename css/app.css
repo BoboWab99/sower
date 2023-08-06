@@ -1,7 +1,52 @@
 
+:root {
+   --sw-green: #12b212;
+   --sw-green-rgb: 18, 178, 18;
+   --bs-primary: var(--sw-green);
+   --bs-primary-rgb: var(--sw-green-rgb);
+   --bs-link-color: var(--bs-primary);
+   --bs-link-color-rgb: var(--bs-primary-rgb);
+   --bs-link-hover-color: var(--bs-success);
+   --bs-link-hover-color-rgb: 25, 135, 84;
+}
+
+.btn-primary {
+   --bs-btn-bg: var(--bs-primary);
+   --bs-btn-border-color: var(--bs-primary);
+   --bs-btn-hover-bg: var(--bs-success);
+   --bs-btn-hover-border-color: var(--bs-success);
+   --bs-btn-disabled-bg: var(--bs-primary);
+   --bs-btn-disabled-border-color: var(--bs-primary);
+   --bs-btn-active-bg: var(--bs-success);
+   --bs-btn-active-border-color: var(--bs-success);
+   --bs-btn-focus-shadow-rgb: 105, 199, 155;
+}
+
+.btn-outline-primary {
+   --bs-btn-color: var(--bs-primary);
+   --bs-btn-border-color: var(--bs-primary);
+   --bs-btn-hover-bg: var(--bs-primary);
+   --bs-btn-hover-border-color: var(--bs-primary);
+   --bs-btn-disabled-color: var(--bs-primary);
+   --bs-btn-disabled-border-color: var(--bs-primary);
+   --bs-btn-active-bg: var(--bs-primary);
+   --bs-btn-active-border-color: var(--bs-primary);
+   --bs-btn-focus-shadow-rgb: 105, 199, 155;
+}
+
 img {
    display: block;
    max-width: 100%;
+}
+
+.navbar {
+   --bs-navbar-padding-y: .75rem;
+}
+
+.navbar-brand {
+   --bs-navbar-brand-color: var(--sw-green);
+   --bs-navbar-brand-hover-color: var(--bs-success);
+   font-weight: 500;
 }
 
 .form-field {
@@ -12,17 +57,50 @@ img {
 .form-field label {
    font-size: .825rem;
    font-weight: 500;
-   color: #205fbd;
+   color: var(--sw-green);
+}
+
+.dropdown-menu {
+   --bs-dropdown-border-color: #fff;
+   --bs-dropdown-link-hover-bg: #bcd7ff;
+   --bs-dropdown-item-border-radius: .3rem;
+   box-shadow: 2px 4px 12px rgba(14, 11, 32, .2);
+}
+
+.dropdown-menu .dropdown-item {
+   width: auto;
+   margin-inline: var(--bs-dropdown-padding-y);
+}
+
+[class*="btn-outline"] {
+   font-weight: 500;
+   font-size: .9375rem;
+}
+
+/* button with plus sign before text */
+.plus-btn {
+   position: relative;
+   padding-left: 2.25rem;
+}
+
+.plus-btn::before {
+   content: "\002B";
+   position: absolute;
+   top: 42%;
+   left: var(--bs-btn-padding-x);
+   transform: translate(-4px, -50%);
+   line-height: 1;
+   font-size: 2rem;
 }
 
 /* invalid form fields */
 
-:focus:invalid {
+.form-control:focus:invalid {
    border-color: var(--bs-red);
    box-shadow: 0 0 0 .25rem rgba(225, 83, 97, .4);
 }
 
-:focus:valid {
+.form-control:focus:valid {
    border-color: var(--bs-success);
    box-shadow: 0 0 0 .25rem rgba(60, 153, 110, .4);
 }

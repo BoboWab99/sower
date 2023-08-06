@@ -12,6 +12,7 @@ class User
    public $last_name;
    public $is_admin;
    public $is_super_admin;
+   public $full_name;
 
    function __construct(
       $id,
@@ -29,6 +30,7 @@ class User
       $this->last_name = $last_name;
       $this->is_admin = $is_admin;
       $this->is_super_admin = $is_super_admin;
+      $this->full_name = "$this->first_name $this->last_name";
    }
 
    function __destruct()
@@ -40,13 +42,16 @@ class User
    {
       $user = null;
       $query = "SELECT * FROM `user`";
-      $query .= "WHERE `email` = '{$email}' AND `password` = '{$password}' LIMIT 1;";
+      $query .= "WHERE `email` = '$email' LIMIT 1;";
       $conn = getConnection();
+      $result =  mysqli_query($conn, $query);
 
-      if ($result =  mysqli_query($conn, $query)) {
-         if (mysqli_num_rows($result) > 0) {
-            $data = mysqli_fetch_assoc($result);
-            print_r($data);
+      if ($result && mysqli_num_rows($result) > 0) {
+         $data = mysqli_fetch_assoc($result);
+         $hashed_password = $data['password'];
+         // print_r($data);
+
+         if (password_verify($password, $hashed_password)) {
             $user = new User(
                $data['id'],
                $data['email'],
