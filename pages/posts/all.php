@@ -8,7 +8,7 @@ session_start();
 
 // check if there's logged in user
 if (!isset($_SESSION['auth_user'])) {
-   header('Location: login.php');
+   header('Location: ../core/login.php');
    exit();
 }
 
@@ -55,7 +55,7 @@ if ($result = mysqli_query($conn, $query_posts)) {
    }
 }
 
-// close connection,
+// close connection
 mysqli_close($conn);
 
 // save new post

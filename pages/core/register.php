@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                <?php
                } else { // @else is_user_logged_in
                ?>
-                  <a href="register.php" role="button" class="btn btn-primary">Register</a>
+                  <a href="login.php" role="button" class="btn btn-primary">Login</a>
 
                <?php
                } // @endif is_user_logged_in

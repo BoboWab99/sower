@@ -23,9 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['auth_user'] = $user;              // authorized user
       $_SESSION['auth_user_id'] = $user->id;       // authorized user's id
       header('Location: ../posts/all.php');
-
    } else {
-      // msg??
+      $_SESSION['form_error'] = "Incorrect username or password!";
       header('Refresh:0');
    }
    exit();
@@ -125,10 +124,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    <div class="py-5">
       <div class="col-10 col-md-7 col-lg-5 col-xl-4 mx-auto">
-         
+
          <?php if ($is_user_logged_in) echo "<p class='badge text-bg-info text-wrap fw-medium w-100 py-2 lh-base'>You're already logged in <b>!!!</b> <br> <span class='fw-normal'>Logout to login with a different account!</span></p>" ?>
 
          <h3 class="mb-4">Login</h3>
+
+         <?php
+         if (isset($_SESSION['form_error'])) {
+            echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>" . $_SESSION['form_error'] . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+            unset($_SESSION['form_error']);
+         }
+         ?>
 
          <form class="d-grid gap-3" method="POST" id="form">
             <div class="form-field">
