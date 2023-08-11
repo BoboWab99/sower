@@ -130,6 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          <h3 class="mb-4">Login</h3>
 
          <?php
+         // show login error
          if (isset($_SESSION['form_error'])) {
             echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>" . $_SESSION['form_error'] . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
             unset($_SESSION['form_error']);

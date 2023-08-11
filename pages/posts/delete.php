@@ -150,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   <div>
                      <h6 class="card-title"><?php echo $post['title'] ?></h6>
                      <p class="mb-2"><?php echo $post['content'] ?></p>
-                     <small class="d-block fw-medium text-primary opacity-75">
+                     <small class="d-block fw-medium text-primary opacity-50">
                         <span>Me</span>
                         <span>&mdash;</span>
                         <span><?php echo $post['last_edited'] ?></span>

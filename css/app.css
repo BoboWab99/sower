@@ -34,6 +34,10 @@
    --bs-btn-focus-shadow-rgb: 105, 199, 155;
 }
 
+a {
+   text-decoration: none;
+}
+
 img {
    display: block;
    max-width: 100%;
