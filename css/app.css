@@ -34,6 +34,13 @@
    --bs-btn-focus-shadow-rgb: 105, 199, 155;
 }
 
+/* body {
+   background-image: url("../resources/Cow_female_black_white.jpg");
+   background-repeat: no-repeat;
+   background-size: 100% 100vh;
+   background-attachment: fixed;
+} */
+
 a {
    text-decoration: none;
 }
