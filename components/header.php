@@ -16,7 +16,7 @@ if (session_id() == '' || !isset($_SESSION) || session_status() === PHP_SESSION_
 
 
 <header class="header navbar navbar-expand-lg sticky-top bg-white shadow--1" id="header">
-   <nav class="container bd-gutter flex-wrap flex-lg-nowrap" aria-label="Main navigation">
+   <nav class="container-fluid gx-5 flex-wrap flex-lg-nowrap" aria-label="Main navigation">
       <a class="navbar-brand" href="<?php echo $path_prefix . "index.php" ?>">Sower</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>

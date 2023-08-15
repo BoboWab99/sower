@@ -1,8 +1,10 @@
 <?php
 
-require_once "../../logic/db.php";
-require_once "../../logic/functions.php";
-require_once "../../logic/user.class.php";
+$path_prefix = "../../";
+
+require_once $path_prefix . "logic/db.php";
+require_once $path_prefix . "logic/functions.php";
+require_once $path_prefix . "logic/user.class.php";
 
 session_start();
 
@@ -81,8 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 
-$path_prefix = "../../";
-
 // --- END LOGIC ---
 ?>
 
@@ -101,64 +101,78 @@ $path_prefix = "../../";
 
    <?php include_once $path_prefix . "components/header.php" ?>
 
-   <div class="container py-4">
-      <div class="row g-3 g-lg-5">
-         <div class="col-md-5 col-lg-3">
-            <div class="latest pb-5 mb-5">
-               <h6>Latest</h6>
-            </div>
-            <div class="popular">
-               <h6>Popular</h6>
-            </div>
-         </div>
-
-         <div class="col-md-7 col-lg-9">
-            <div class="d-flex justify-content-between align-items-start gap-3">
-               <h1 class="lh-1">Posts</h1>
-               <a href="new.php" role="button" class="btn btn-primary plus-btn">Write</a>
-            </div>
-            <p class="mb-1">Browse by categories or tags</p>
-            <div class="d-flex flex-wrap gap-1 mb-4 pb-2">
-
-               <!-- TODO: links for filtering!!! -->
-
-               <!-- loop through categories -->
-               <?php foreach ($categories as $category) { ?>
-                  <a class="badge text-bg-primary text-capitalize" href="#"><?php echo $category['name'] ?></a>
-               <?php } ?>
-
-               <!-- loop through tags -->
-               <?php foreach ($tags as $tag) { ?>
-                  <a class="badge text-bg-primary" href="#">#<?php echo $tag['name'] ?></a>
-               <?php } ?>
+   <div class="main-posts">
+      <div class="container-fluid gx-md-5">
+         <div class="row g-3 g-lg-5">
+            <div class="col-md-4 col-lg-3">
+               <div class="latest pt-4 pb-5 mb-5">
+                  <h6>Latest</h6>
+                  <p>...</p>
+               </div>
+               <div class="popular pb-5">
+                  <h6>Popular</h6>
+                  <p>...</p>
+               </div>
             </div>
 
-            <!-- loop through posts -->
-            <div class="posts d-grid gap-2">
-               <?php foreach ($posts as $post) { ?>
-                  <div class="card border-0 shadow--1">
-                     <div class="card-body d-flex gap-3">
-                        <img src="#" class="post-image" alt="Post image">
-                        <div>
-                           <h6 class="card-title"><?php echo $post['title'] ?></h6>
-                           <p class="mb-2"><?php echo $post['content'] ?></p>
+            <div class="col-md-8 col-lg-9 bg-light-primary">
+               <div class="col-10 col-lg-8 col-xl-6 mx-auto">
+                  <div class="d-flex justify-content-between align-items-start gap-3 pt-4">
+                     <h1 class="lh-1 fs-3">Posts</h1>
+                     <a href="new.php" role="button" class="btn btn-primary plus-btn">Write</a>
+                  </div>
 
-                           <small class="d-block fw-medium text-success opacity-50">
-                              <span><?php echo "@" . $post['username'] ?></span>
-                              <span>&mdash;</span>
-                              <span><?php echo $post['last_edited'] ?></span>
-                           </small>
-
-                           <?php if ($post['author'] == $user->id) { ?>
-                              <a class="me-2" href="../posts/update.php?id=<?php echo $post['id'] ?>">Edit</a>
-                              <a class="text-danger" href="../posts/delete.php?id=<?php echo $post['id'] ?>">Delete</a>
-                           <?php } ?>
-                        </div>
+                  <div class="py-3">
+                     <p class="mb-1">Browse by categories or tags</p>
+                     <div class="d-flex flex-wrap gap-1 mb-4 pb-2">
+                        <!-- TODO: links for filtering!!! -->
+                        <!-- loop through categories -->
+                        <?php foreach ($categories as $category) { ?>
+                           <a class="badge text-bg-primary text-capitalize" href="#"><?php echo $category['name'] ?></a>
+                        <?php } ?>
+                        <!-- loop through tags -->
+                        <?php foreach ($tags as $tag) { ?>
+                           <a class="badge text-bg-primary" href="#">#<?php echo $tag['name'] ?></a>
+                        <?php } ?>
                      </div>
                   </div>
-               <?php } ?>
-            </div>
 
+                  <!-- loop through posts -->
+                  <div class="posts d-grid gap-2 pb-5">
+                     <?php
+                     foreach ($posts as $post) {
+                     ?>
+                        <div class="card border-0 shadow--1" data-href="<?php echo "details.php?id=" . $post['id'] ?>" tabindex="0" role="link">
+                           <div class="card-body d-flex gap-3">
+                              <img src="#" class="post-image" alt="Post image">
+                              <div>
+                                 <h6 class="card-title"><?php echo $post['title'] ?></h6>
+                                 <p class="clip-text mb-2"><?php echo $post['content'] ?></p>
+                                 <small class="d-block fw-medium text-success opacity-50">
+                                    <span><?php echo "@" . $post['username'] ?></span>
+                                    <span>&mdash;</span>
+                                    <span><?php echo $post['last_edited'] ?></span>
+                                 </small>
+
+                                 <?php
+                                 if ($post['author'] == $user->id) {
+                                 ?>
+                                    <div class="d-flex gap-2 mt-2">
+                                       <a class="btn btn-sm btn-outline-primary" href="<?php echo "update.php?id=" . $post['id'] ?>">Edit</a>
+                                       <a class="btn btn-sm btn-outline-danger" href="<?php echo "delete.php?id=" . $post['id'] ?>">Delete</a>
+                                    </div>
+                                 <?php
+                                 }  // end @if user is author
+                                 ?>
+                              </div>
+                           </div>
+                        </div>
+                     <?php
+                     }  // end loop posts
+                     ?>
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
    </div>

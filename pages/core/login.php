@@ -1,7 +1,9 @@
 <?php
 
-require_once "../../logic/functions.php";
-require_once "../../logic/user.class.php";
+$path_prefix = "../../";
+
+require_once $path_prefix . "logic/functions.php";
+require_once $path_prefix . "logic/user.class.php";
 
 session_start();
 
@@ -21,18 +23,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    if ($user) {
       $_SESSION['auth_user'] = $user;              // authorized user
-      $_SESSION['auth_user_id'] = $user->id;       // authorized user's id
-      header('Location: ../posts/all.php');
+      $_SESSION['auth_user_id'] = $user->id;       // authorized user's id for quick access
+
+      // if user is admin
+      if ($user->is_admin) {
+         header("Location: " . $path_prefix . "pages/admin/dashboard.php");
+      } else {
+         // normal user
+         header("Location: " . $path_prefix . "pages/posts/all.php");
+      }
    } else {
       $_SESSION['form_error'] = "Incorrect username or password!";
       header('Refresh:0');
    }
    exit();
 }
-
-
-// path prefix
-$path_prefix = "../../";
 
 // --- END LOGIC ---
 ?>

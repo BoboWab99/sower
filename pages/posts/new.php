@@ -1,7 +1,8 @@
 <?php
+$path_prefix = "../../";
 
-require_once "../../logic/functions.php";
-require_once "../../logic/user.class.php";
+require_once $path_prefix . "logic/functions.php";
+require_once $path_prefix . "logic/user.class.php";
 
 session_start();
 
@@ -29,8 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    mysqli_close($conn);
 }
 
-
-$path_prefix = "../../";
 
 // --- END LOGIC ---
 ?>
@@ -70,7 +69,7 @@ $path_prefix = "../../";
       </div>
    </div>
 
-   <?php include_once $path_prefix . "components/css-links.php" ?>
+   <?php include_once $path_prefix . "components/js-links.php" ?>
 </body>
 
 </html>

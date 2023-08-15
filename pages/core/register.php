@@ -1,8 +1,10 @@
 <?php
 
-require_once "../../logic/db.php";
-require_once "../../logic/functions.php";
-require_once "../../logic/user.class.php";
+$path_prefix = "../../";
+
+require_once $path_prefix . "logic/db.php";
+require_once $path_prefix . "logic/functions.php";
+require_once $path_prefix . "logic/user.class.php";
 
 session_start();
 
@@ -14,8 +16,8 @@ if ($is_user_logged_in) {
 // save data
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $username = test_input($_POST['username']);
-   $firstName = test_input($_POST['firstName']);
-   $lastName = test_input($_POST['lastName']);
+   $first_name = test_input($_POST['firstName']);
+   $last_name = test_input($_POST['lastName']);
    $email = test_input($_POST['email']);
    $tel = test_input($_POST['phoneNumber']);
    $password1 = test_input($_POST['password1']);
@@ -29,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       exit();
    }
 
-   $query = "INSERT INTO `user` (`username`, `first_name`, `last_name`, `email`, `password`)";
-   $query .= "VALUES ('$username', '$firstName', '$lastName', '$email', '$password');";
+   $query  = "INSERT INTO `user` (`username`, `first_name`, `last_name`, `email`, `tel`, `password`)";
+   $query .= "VALUES ('$username', '$first_name', '$last_name', '$email', '$tel', '$password');";
 
    $conn = getConnection();
    if (mysqli_query($conn, $query)) {
@@ -41,10 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    }
    mysqli_close($conn);
 }
-
-
-// path prefix
-$path_prefix = "../../";
 
 // --- END LOGIC ---
 ?>
@@ -118,27 +116,7 @@ $path_prefix = "../../";
 
 
    <?php include_once $path_prefix . "components/js-links.php" ?>
-
-   <script>
-      // some form validation
-      const form = document.getElementById('form')
-      const password1 = document.getElementById('password1')
-      const password2 = document.getElementById('password2')
-
-      form.addEventListener('submit', (e) => {
-         e.preventDefault()
-
-         if (password1.value != password2.value) {
-            password2.setCustomValidity('Passwords do not match!')
-            password2.reportValidity()
-            return
-         } else {
-            password2.setCustomValidity('')
-         }
-
-         form.submit()
-      })
-   </script>
+   <script src="<?php echo $path_prefix . "js/register.js" ?>"></script>
 
 </body>
 

@@ -1,8 +1,10 @@
 <?php
 
-require_once "../../logic/db.php";
-require_once "../../logic/functions.php";
-require_once "../../logic/user.class.php";
+$path_prefix = "../../";
+
+require_once $path_prefix . "logic/db.php";
+require_once $path_prefix . "logic/functions.php";
+require_once $path_prefix . "logic/user.class.php";
 
 session_start();
 
@@ -44,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 
-$path_prefix = "../../";
 
 // --- END LOGIC ---
 ?>

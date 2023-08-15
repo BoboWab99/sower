@@ -1,4 +1,3 @@
-
 :root {
    --sw-green: #12b212;
    --sw-green-rgb: 18, 178, 18;
@@ -48,6 +47,67 @@ a {
 img {
    display: block;
    max-width: 100%;
+}
+
+th {
+   font-size: .9375em;
+   font-weight: 500;
+   color: var(--bs-primary) !important;
+}
+
+[role="link"] {
+   cursor: pointer;
+}
+
+.table-group-divider {
+   border-top-color: #688868;
+}
+
+.img-hd,
+.img-square {
+   aspect-ratio: var(--_aspect-ratio);
+   object-fit: cover;
+   background-color: #ebf5f0;
+   flex: 0 0 auto;
+}
+
+.img-hd {
+   --_aspect-ratio: 25 / 6;
+}
+
+.img-square {
+   --_aspect-ratio: 1 / 1;
+}
+
+.square,
+.circle {
+   width: var(--_size, 50px);
+   height: var(--_size, 50px);
+   background-color: var(--_bg, #aed4c1);
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   font-size: .9375rem;
+   font-weight: 500;
+   flex: 0 0 auto;
+}
+
+.circle {
+   border-radius: 50%;
+}
+
+.bg-light-primary {
+   background-color: #f4f5f4 !important;
+   /* ebf5f0 */
+}
+
+/* ref: https://stackoverflow.com/a/13924997 */
+.clip-text {
+   overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: var(--_num-lines, 2);
+   line-clamp: var(--_num-lines, 2);
+   -webkit-box-orient: vertical;
 }
 
 .navbar {
@@ -127,4 +187,30 @@ img {
    flex-shrink: 0;
    background-color: lightblue;
    border-radius: .5rem;
+}
+
+/* post details */
+
+textarea.rows-1 {
+   min-height: calc(2.25rem + 1.5px);
+   max-height: calc(2.25rem + 1.5px);
+}
+
+/* admin */
+
+.layout-admin {
+   height: 100vh;
+   height: 100dvh;
+   overflow: hidden;
+}
+
+.layout-admin .nav-item {
+   display: grid;
+   grid-template-columns: 2rem 1fr;
+   align-items: center;
+   /* padding-block: .5rem; */
+}
+
+.layout-admin .top-nav-height {
+   height: 70px;
 }
